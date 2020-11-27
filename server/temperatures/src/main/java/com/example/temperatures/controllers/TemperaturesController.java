@@ -1,5 +1,6 @@
 package com.example.temperatures.controllers;
 
+import com.example.temperatures.requests.temperatures.TemperatureRequest;
 import com.example.temperatures.responses.temperatures.TemperatureResponse;
 import com.example.temperatures.responses.temperatures.TemperaturesResponse;
 import com.example.temperatures.utils.Paths;
@@ -7,10 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +51,11 @@ public class TemperaturesController {
         LOG.info(temperatureResponse.toString());
 
         return new ResponseEntity<>(temperatureResponse, HttpStatus.OK);
+    }
+
+    @PostMapping(Paths.TEMPERATURES)
+    public ResponseEntity<TemperatureResponse> saveTemperature(@Valid @RequestBody TemperatureRequest request) {
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 }
